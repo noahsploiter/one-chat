@@ -94,8 +94,8 @@ const Id = ({ id, chatData }) => {
           {messageSnapshots?.docs?.map((msg) => {
             if (msg.data().chatId === id) {
               return (
-                <div>
-                  <div key={msg.id}
+                <div key={msg.id}>
+                  <div
                     className={
                       msg.data().user === user?.email
                         ? "w-full flex justify-end mb-5 "
@@ -111,6 +111,7 @@ const Id = ({ id, chatData }) => {
               );
             }
           })}
+
         </div>
         <div className="absolute inset-x-0 bottom-0">
           <div className="absolute inset-x-0 bottom-0">
