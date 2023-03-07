@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/future/image";
-import Loader from "../public/gifs/Loading.gif"
+import Loader from "../public/gifs/Loading.png"
 
 
 const Loading = () => {

@@ -67,8 +67,9 @@ const Id = ({ id, chatData }) => {
   const date = newDate.toLocaleDateString();
 
   return (
-    <div className="gradient w-full h-screen overflow-hidden">
-      <div className="w-full p-5 bg-[#00000044] backdrop-blur-sm flex items-center space-x-5">
+
+    <div className="gradient w-full h-screen overflow-y-auto ">
+      <div className="w-full p-5 bg-[#00000044] backdrop-blur-sm flex items-center space-x-5 absolute top-0 sticky ">
         <div>
           <Image
             src={imageURL || DefaultImage}
@@ -87,44 +88,57 @@ const Id = ({ id, chatData }) => {
           </div>
         </div>
       </div>
-      <div className="w-full h-[77vh] overflow-y-auto overflow-x-hidden p-5">
-        {messageSnapshots?.docs?.map((msg) => {
-          if (msg.data().chatId === id) {
-            return (
-              <div key={msg.id}
-                className={
-                  msg.data().user === user?.email
-                    ? "w-full flex justify-end mb-5"
-                    : "w-full flex mb-5"
-                }
-              >
-                <Message msg={msg} />
-              </div>
-            );
-          }
-        })}
-      </div>
-      <form
-        onSubmit={createMessage}
-        className="w-full p-5 bg-[#00000044] backdrop-blur-sm h-full"
-      >
-        <div className="flex items-center relative">
-          <input
-            type="text"
-            className="w-full border pr-10 pl-5 py-4 bg-transparent rounded-full outline-none focus:border-[#cd71ff]"
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-            value={message}
-            placeholder="Type Here"
-            required
-          />
-          <button className="text-3xl absolute right-4">
-            <MdSend />
-          </button>
+
+      <div>
+        <div className="w-full mb-[100px]  overflow-y-auto overflow-x-hidden p-5">
+          {messageSnapshots?.docs?.map((msg) => {
+            if (msg.data().chatId === id) {
+              return (
+                <div>
+                  <div key={msg.id}
+                    className={
+                      msg.data().user === user?.email
+                        ? "w-full flex justify-end mb-5 "
+                        : "w-full flex mb-5 "
+                    }
+                  >
+                    <Message msg={msg} />
+                  </div>
+                  <div>
+
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
-      </form>
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="absolute inset-x-0 bottom-0">
+            <form
+              onSubmit={createMessage}
+              className="  bg-[#00000044] backdrop-blur-sm "
+            >
+              <div className="flex items-center relative">
+                <input
+                  type="text"
+                  className="w-full  border pr-10 pl-5 py-4 bg-transparent rounded-full outline-none focus:border-[#cd71ff]"
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                  value={message}
+                  placeholder="Type Here"
+                  required
+                />
+                <button className="text-3xl absolute right-4">
+                  <MdSend />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+
   );
 };
 

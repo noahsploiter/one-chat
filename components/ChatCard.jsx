@@ -28,21 +28,25 @@ const ChatCard = ({ chatData }) => {
 
   return (
     <Link href={`/chats/${chatData?.id}`}>
-    <div className="w-full flex items-center py-3 px-5 border-b rounded-xl border-[#353535] space-x-6 cursor-pointer hover:bg-[#1d1d1d]">
-      <div className="rounded-full w-[55px] h-[55px] relative">
-        <Image
-          src={imageURL || DefaultImage}
-          alt=""
-          width={55}
-          height={55}
-          priority={true}
-          quality={100}
-          className="rounded-full"
-        />
-        {online ? <span className="w-3 h-3 bg-green-500 rounded-full absolute z-[999] bottom-1 right-0"></span> : ""}
+      <div className="w-full flex items-center py-3 px-5 border-b rounded-xl border-[#353535] space-x-6 cursor-pointer bg-[#5e5b5b]">
+        <div className="rounded-full w-[35px] h-[35px] relative">
+          <Image
+            src={imageURL || DefaultImage}
+            alt=""
+            width={55}
+            height={55}
+            priority={true}
+            quality={100}
+            className="rounded-full"
+          />
+          {online ? (
+            <span className="w-3 h-3 bg-green-500 rounded-full absolute z-[999] bottom-1 right-0"></span>
+          ) : (
+            ""
+          )}
+        </div>
+        <span>{name || "User"}</span>
       </div>
-      <span>{name || "User"}</span>
-    </div>
     </Link>
   );
 };

@@ -10,10 +10,11 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 function MyApp({ Component, pageProps }) {
 
+
   const [user, loading] = useAuthState(auth);
 
-  useEffect(()=>{
-    window.addEventListener('beforeunload', function(e) {
+  useEffect(() => {
+    window.addEventListener('beforeunload', function (e) {
       let confirmationMessage = "Do You Want To Leave?";
       (e || window.event).returnValue = confirmationMessage;
       if (user) {
@@ -22,25 +23,25 @@ function MyApp({ Component, pageProps }) {
           email: user?.email,
           imageURL: user?.photoURL,
           online: false,
-        lastSeen: serverTimestamp()
-        }, {merge: true});
-       }
+          lastSeen: serverTimestamp()
+        }, { merge: true });
+      }
     })
-     if (user) {
+    if (user) {
       setDoc(doc(db, "users", user?.uid), {
         name: user?.displayName,
         email: user?.email,
         imageURL: user?.photoURL,
         online: true,
         lastSeen: serverTimestamp()
-      }, {merge: true});
-     }
+      }, { merge: true });
+    }
   })
 
   if (loading) return <Loading />
   if (!user) return <Login />
   return (
-    <div className='flex'>
+    <div className=''>
       <Sidebar />
       <Component {...pageProps} />
     </div>
