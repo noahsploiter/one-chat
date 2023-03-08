@@ -118,7 +118,7 @@ const Sidebar = () => {
 
           <div className="p-6 w-4/1 h-screen backdrop-blur-sm z-20 fixed top-0 -left-96 lg:w-60 lg:left-0 peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
             <div className="items-center w-full space-x-4">
-              <div className="absolute inset-x-0 bottom-10 flex justify-center">
+              <div className="absolute inset-x-0 bottom-[100px] flex justify-center">
                 <div className="w-[100px]">
                   <div className="w-[50px] h-[50px] overflow-hidden border rounded-full ml-6">
                     <Image

@@ -114,15 +114,15 @@ const Id = ({ id, chatData }) => {
 
         </div>
         <div className="absolute inset-x-0 bottom-0">
-          <div className="absolute inset-x-0 bottom-0">
+          <div className="absolute inset-x-0 bottom-2">
             <form
               onSubmit={createMessage}
               className="  bg-[#00000044] backdrop-blur-sm "
             >
-              <div className="flex items-center relative">
+              <div className="flex items-center relative mr-5 ml-5">
                 <input
                   type="text"
-                  className="w-full h-[50px]  border pr-10 pl-5 py-4 bg-transparent rounded-xl outline-none focus:border-[#cd71ff]"
+                  className="w-full h-[45px]  border pr-10 pl-5 py-4 bg-transparent rounded-xl outline-none focus:border-[#cd71ff]"
                   onChange={(e) => {
                     setMessage(e.target.value);
                   }}
