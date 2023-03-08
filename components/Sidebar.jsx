@@ -51,15 +51,15 @@ const Sidebar = () => {
   const q = query(chatsRef, where("users", "array-contains", user?.email));
   const [chatSnapShots, loading3] = useCollection(q);
   return (
-    <div className="">
+    <div className="gradient h-[50px]">
       <div className="flex justify-end ml-[30px]">
         <div className="relative w-full flex items-center">
-          <div className="text-xl absolute left-3">
+          <div className="text-xl absolute top-5 left-3">
             <AiOutlineSearch />
           </div>
           <input
             type="text "
-            className="border bg-transparent  w-[200px] px-10 py-2 rounded-full border-[#494949] outline-none focus:border-[#cd71ff]"
+            className="absolute h-[30px] top-3  border bg-transparent  w-[200px] px-10 py-2 rounded-full border-[#494949] outline-none focus:border-[#cd71ff]"
             placeholder="Search Here"
             onChange={(e) => {
               setSearch(e.target.value);
@@ -68,26 +68,59 @@ const Sidebar = () => {
           />
           {search.length > 0 && (
             <button
-              className="absolute right-4 text-2xl"
+              className="absolute  text-2xl"
               onClick={() => {
                 setSearch("");
               }}
-            >
-              <IoMdClose />
-            </button>
+            ></button>
           )}
+          <div
+            className={
+              search.length > 0
+                ? "w-full overflow-y-auto mt-20 transition-all"
+                : "w-full h-0 overflow-y-auto mt-5 transition-all"
+            }
+          >
+            {!loading2 ? (
+              userSnapShots?.docs?.map((item) => {
+                if (
+                  item
+                    .data()
+                    .name.toLowerCase()
+                    .includes(search.toLowerCase()) &&
+                  item.data().name !== user?.displayName
+                ) {
+                  return (
+                    <Card
+                      key={item.id}
+                      name={item.data().name}
+                      imageURL={item.data().imageURL}
+                      email={item.data().email}
+                      id={item.id}
+                      setSearch={setSearch}
+                    />
+                  );
+                }
+              })
+            ) : (
+              <div>
+                <CardLoader />
+                <CardLoader />
+                <CardLoader />
+              </div>
+            )}
+          </div>
         </div>
-
         <Disclosure as="nav">
-          <Disclosure.Button className="pt-[10px] inline-flex items-center peer justify-center rounded-md p-2 text-grey-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group hover:bg-gray-900">
+          <Disclosure.Button className="mt-[10px] inline-flex items-center peer justify-center rounded-md p-2 text-grey-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group hover:bg-gray-900">
             <GiHamburgerMenu className="black md:hidden w-6 h-6" />
           </Disclosure.Button>
 
           <div className="p-6 w-4/1 h-screen backdrop-blur-sm z-20 fixed top-0 -left-96 lg:w-60 lg:left-0 peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
             <div className="items-center w-full space-x-4">
-              <div className="absolute inset-x-0 bottom-0 flex justify-center">
+              <div className="absolute inset-x-0 bottom-10 flex justify-center">
                 <div className="w-[100px]">
-                  <div className="w-[50px] h-[50px] overflow-hidden border rounded-full">
+                  <div className="w-[50px] h-[50px] overflow-hidden border rounded-full ml-6">
                     <Image
                       src={user?.photoURL}
                       width={50}
@@ -97,7 +130,7 @@ const Sidebar = () => {
                       alt=""
                     />
                   </div>
-                  <div className="w-full">
+                  <div className="w-full text-center">
                     <h1 className="text-xl my-2">{user?.displayName}</h1>
                     <div
                       className=" text-xl bg-[#fff] w-full text-black py-1 rounded-md hover:bg-[#92929275] transition-colors hover:text-white cursor-pointer"
@@ -109,43 +142,8 @@ const Sidebar = () => {
                 </div>
               </div>
             </div>
-            <div
-              className={
-                search.length > 0
-                  ? "w-full h-screen overflow-y-auto mt-5 transition-all"
-                  : "w-full h-0 overflow-y-auto mt-5 transition-all"
-              }
-            >
-              {!loading2 ? (
-                userSnapShots?.docs?.map((item) => {
-                  if (
-                    item
-                      .data()
-                      .name.toLowerCase()
-                      .includes(search.toLowerCase()) &&
-                    item.data().name !== user?.displayName
-                  ) {
-                    return (
-                      <Card
-                        key={item.id}
-                        name={item.data().name}
-                        imageURL={item.data().imageURL}
-                        email={item.data().email}
-                        id={item.id}
-                        setSearch={setSearch}
-                      />
-                    );
-                  }
-                })
-              ) : (
-                <div>
-                  <CardLoader />
-                  <CardLoader />
-                  <CardLoader />
-                </div>
-              )}
-            </div>
-            <div className="w-full h-screen overflow-y-auto mt-2 transition-all">
+
+            <div className="w-full  h-screen overflow-y-auto mt-2 transition-all">
               {!loading3 ? (
                 chatSnapShots?.docs?.map((chat) => {
                   return <ChatCard key={chat.id} chatData={chat} />;

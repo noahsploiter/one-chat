@@ -10,8 +10,8 @@ const Login = () => {
     await signInWithPopup(auth, provider);
   };
   return (
-    <div className="w-full h-screen overflow-hidden bg-[#252525] flex justify-center items-center flex-col space-y-10">
-      <div className="items-center space-x-4">
+    <div className="w-full h-screen overflow-hidden bg-[#fff] flex justify-center items-center flex-col space-y-10">
+      <div className="items-center space-x-4 ">
         <Image
           src={Logo}
           width={100}
@@ -21,10 +21,11 @@ const Login = () => {
           alt=""
         />
         <h1 className="text-5xl font-bold">
-          <span className="text-[#3a75ece8]">One</span> Chat
+          <span className="text-black">One</span>{" "}
+          <span className="text-[#3a75ece8]">Chat</span>
         </h1>
       </div>
-      <div>
+      <div className="shadow-lg rounded-sm">
         <button
           className="flex items-center text-3xl bg-white text-black px-5 py-2 rounded-md hover:bg-[#e2e2e2] transition-colors font-semibold space-x-3"
           onClick={login}

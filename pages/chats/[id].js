@@ -69,12 +69,12 @@ const Id = ({ id, chatData }) => {
   return (
 
     <div className="gradient w-full h-screen overflow-y-auto ">
-      <div className="w-full p-5 bg-[#00000044] backdrop-blur-sm flex items-center space-x-5 absolute top-0 sticky ">
+      <div className="w-full p-5 bg-[#00000044] backdrop-blur-sm flex items-center space-x-5  top-0 sticky h-[40px]">
         <div>
           <Image
             src={imageURL || DefaultImage}
-            width={70}
-            height={70}
+            width={30}
+            height={30}
             priority={true}
             quality={100}
             alt=""
@@ -122,7 +122,7 @@ const Id = ({ id, chatData }) => {
               <div className="flex items-center relative">
                 <input
                   type="text"
-                  className="w-full  border pr-10 pl-5 py-4 bg-transparent rounded-full outline-none focus:border-[#cd71ff]"
+                  className="w-full h-[50px]  border pr-10 pl-5 py-4 bg-transparent rounded-xl outline-none focus:border-[#cd71ff]"
                   onChange={(e) => {
                     setMessage(e.target.value);
                   }}
